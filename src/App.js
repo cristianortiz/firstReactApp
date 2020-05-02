@@ -5,18 +5,13 @@ import Tasks from "./components/Tasks"; //componente Tasks
 
 class App extends Component {
   state = {
-    tasks: tasks_data,
+    tasks: tasks_data, //le paso los datos de las tareas desde task.json
   };
-  //con met. map recorro el array de tareas importado  insertando cada propiedad en un tag html
   render() {
+    //llamo al comp. TASKS que listara todas las tareas disponibles, le paso los datos de tasks
     return (
       <div>
-        {this.state.tasks.map((e) => (
-          <p key={e.id}>
-            {e.title}- {e.description} - {e.done}
-            <Tasks></Tasks>
-          </p>
-        ))}
+        <Tasks tasks={this.state.tasks} />
       </div>
     );
   }
