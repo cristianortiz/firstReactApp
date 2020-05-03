@@ -1,8 +1,9 @@
 //componente para encapsular los datos de una sola tarea
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class Task extends Component {
-  //metodo para dar estilo de forma dinamica segun eventos JS
+  //metodo para dar estilo de forma dinamica al componente
   styleCompleted() {
     return {
       fontSize: "20px",
@@ -22,7 +23,12 @@ class Task extends Component {
     );
   }
 }
-export default Task;
+/*chequea el tipo de datos de los props que usa el componente, 
+evita errores de tipo de datos en los props que se pasan entre componentes */
+Task.propTypes = {
+  //comp task, sus props deben ser objetos
+  task: PropTypes.object.isRequired,
+};
 //estilo css a traves de un objeto JS
 const btnDelete = {
   fontSize: "15px",
@@ -31,3 +37,4 @@ const btnDelete = {
   padding: "10px",
   borderRadius: "10%",
 };
+export default Task;
