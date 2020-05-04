@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+//componentes enrutadores de react para simular rutas y dividir la app
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"; //enrutadores de react
 import "./App.css";
 import tasks_data from "./samples/task.json"; //datos de la tareas en json
 import Tasks from "./components/Tasks"; //componente Tasks
@@ -48,13 +50,31 @@ class App extends Component {
     //llamo al comp. TASKS que listara todas las tareas disponibles, con datos y metodos de App a traves de props
     return (
       <div>
-        <TaskForm addTask={this.addTask} />
-        <Tasks
-          tasks={this.state.tasks}
-          deleteTask={this.deleteTask}
-          checkTaskDone={this.checkTaskDone}
-        />
-        <Posts />
+        <Router>
+          <Link to="/">Home</Link>
+          <br />
+
+          <Link to="/posts">Posts</Link>
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return (
+                <div>
+                  <TaskForm addTask={this.addTask} />
+                  <Tasks
+                    tasks={this.state.tasks}
+                    deleteTask={this.deleteTask}
+                    checkTaskDone={this.checkTaskDone}
+                  />
+                </div>
+              );
+            }}
+          ></Route>
+        </Router>
+        <Router>
+          <Route path="/posts" component={Posts}></Route>
+        </Router>
       </div>
     );
   }
